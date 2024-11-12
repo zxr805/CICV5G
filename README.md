@@ -3,6 +3,10 @@ We establish a 5G delay testbed at the intelligent connected vehicle evaluation 
 
 ## data folder 
 This folder contains all the test data, including results from 5G public network (n78) and 5G private network (n8) under different testing conditions.
+
 ## figures folder
-This folder contains all the figures of communication delay distribution under different testing conditions. There are three folders incuding delay-position
+This folder contains all the figures of communication delay distribution under different testing conditions. We have established real-time communication latency data in a real test environment, where utmx and utmy represent the x and y coordinates, and the z-axis indicates the communication latency.
+
+## south folder
+
 
