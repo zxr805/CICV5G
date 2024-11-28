@@ -25,3 +25,5 @@ We have also conducted real-world testing to compare the impact of latency on pl
 + Shuttle Loop Scenario CICV and AV Real-World Test Comparison
 1. the results of AV in the shuttle loop scenario. [shuttle_AV](https://youtu.be/8yW_RCdmDTc)
 2. the results of CICV in the shuttle loop scenario.[shuttle_CICV](https://youtu.be/-7OEzwrUfpw)
+
+If you have any questions, feel free to contact zhangxr@tongji.edu.cn
