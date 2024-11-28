@@ -12,9 +12,9 @@
   The tools folder includes Python code for processing, plotting, and statistical analysis of raw communication delay data, making it easier for users to analyze and process the data.
 ## Usage
 ### Data Usage
-  You can conduct your research using the data from the data folder, which contains two classification methods to help you quickly filter the data. n78 refers to the 5G public network test results, where data transmission involves base station handovers. n8 refers to the results of the private network tests, where there are no base station handovers. Still, due to network coverage limitations, there is a signal quality issue and higher communication delay in the southern region. To facilitate the design of the PnC (Planning and Coordination) algorithm, and consider the actual communication problems, we have also specially provided the results for the southern region with large delay data.
-Of course, you can also perform analysis based on the results obtained from our processing of the raw data. 
-  The figures folder contains the statistics and analysis of the measured data. The Gamma distribution is the result of our statistical analysis of the data, and you can also use the distribution model and data parameters we have established for your research work
+  You can conduct your research using the data from the data folder, which contains two classification methods to help you quickly filter the data. n78 refers to the 5G public network test results, where data transmission involves base station handovers. n8 refers to the results of the private network tests, where there are no base station handovers. Still, due to network coverage limitations, there is a signal quality issue and higher communication delay in the southern region. To facilitate the design of the PnC (Planning and Coordination) algorithm, and consider the actual communication problems, we have also specially provided the results for the southern region with large delay data.  
+    
+  Of course, you can also perform analysis based on the results obtained from our processing of the raw data. The figures folder contains the statistics and analysis of the measured data. The Gamma distribution is the result of our statistical analysis of the data, and you can also use the distribution model and data parameters we have established for your research work
 ### Code Usage
 
 
