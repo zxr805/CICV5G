@@ -6,7 +6,7 @@ We establish a 5G communication delay testbed at the intelligent connected vehic
 ![image](Figures/readme.png)
 
 **DOI (placeholder)**
-Zenodo DOI: https://doi.org/10.5281/zenodo.xxxxxx (to be added after archival)
+Zenodo DOI: https://doi.org/10.5281/zenodo.17475688
 
 ---
 
