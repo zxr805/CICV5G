@@ -1,48 +1,111 @@
-# CICV5G: A 5G Communication Delay Dataset for PnC in Cloud-based Intelligent Connected Vehicles
+# 5G communication delay dataset for cloud‑based vehicle planning and control
 
-We establish a 5G delay testbed at the intelligent connected vehicle evaluation base at Tongji University and conduct extensive field tests. Through these tests, over 300,000 records are collected to build our dataset, **CICV5G**. The dataset includes not only communication delay and channel conditions (such as reference signal received power and signal-to-noise ratio) but also vehicle poses (i.e., vehicle coordinates, velocity). Based on CICV5G, we conduct a comparative analysis of CICVs and autonomous vehicles (AVs) performance in typical scenarios and explore the impact of communication delay on the PnC. To the best of our knowledge, this is the first publicly available dataset of 5G communication delay specifically for PnC of CICVs. 
-![image](Figures/readme.png)
+**Short description**
+5G communication delay dataset for cloud‑based vehicle planning and control (CICV5G) is a real-world, high-frequency 5G communication delay dataset designed for research on planning-and-control (PnC) for cloud-based intelligent connected vehicles (CICVs). The dataset was collected at the Tongji University Intelligent Connected Vehicle Evaluation Base and contains synchronized vehicle state and network performance records (over 150,000 transmission cycles).
 
-## Package Description
+**DOI (placeholder)**
+Zenodo DOI: https://doi.org/10.5281/zenodo.xxxxxx (to be added after archival)
 
-### data folder
+---
 
-This folder contains all the test data, including results from 5G public network (n78) and 5G private network (n8) under different testing conditions.
+## Repository structure (top-level)
 
-### figures folder
+- `CICV5G/`
+  - `Data/` — Experimental datasets organized by scenario and network mode
+  - `Figures/` — Visualization outputs used in the paper and for validation
+  - `Tools/` — Analysis and plotting scripts (Python)
+  - `README.md` — This file (dataset overview and usage instructions)
 
-This folder contains all the figures of communication delay distribution under different testing conditions. We have established real-time communication latency data in a real test environment, where utmx and utmy represent the x and y coordinates, and the z-axis indicates the communication latency.
 
-### tool folder
+---
 
-The tools folder includes Python code for processing, plotting, and statistical analysis of raw communication delay data, making it easier for users to analyze and process the data.
+## Summary of the dataset
+- **Total records:** >150,000 transmission cycles (V2N2V samples).
+- **Scenarios:** Urban, Arterial, Rural / Off-road.
+- **Network modes:** n8 (private network) and n78 (public network).
+- **Primary sampling frequency:** **20 Hz** (standard for most experiments). Additional runs at **10, 33, and 100 Hz** are provided for comparison.
+- **Primary measured quantity:** end-to-end round-trip delay (V2N2V) — computed per transmission cycle as `delay = sub_time − pub_time`.
+- **Data format:** Plain text (.txt), UTF-8 encoded, column-oriented (one row per transmission cycle).
 
-## Usage
+---
 
-### Data Usage
+## File format and conventions
+- All data files are text files with whitespace-separated columns (no binary blobs).
+- Each row corresponds to one publish–subscribe cycle (one communication round trip).
+- Timestamp fields are in **milliseconds** relative to the onboard logger. Because both timestamps are generated on the same onboard device, no cross-device clock synchronization is required to compute RTT.
+- Filenames include scenario and network mode information (for example): `urban_n8_v20_run01.txt`
 
-You can conduct your research using the data from the data folder, which contains two classification methods to help you quickly filter the data. n78 refers to the 5G public network test results, where data transmission involves base station handovers. n8 refers to the results of the private network tests, where there are no base station handovers. Still, due to network coverage limitations, there is a signal quality issue and higher communication delay in the southern region. To facilitate the design of the PnC (Planning and Coordination) algorithm, and consider the actual communication problems, we have also specially provided the results for the southern region with large delay data.
+---
 
-Of course, you can also perform analysis based on the results obtained from our processing of the raw data. The figures folder contains the statistics and analysis of the measured data. The Gamma distribution is the result of our statistical analysis of the data, and you can also use the distribution model and data parameters we have established for your research work
+## Data fields 
+Below is a concise list of the most commonly used fields. 
 
-### Code Usage
+| Category               | Field       | Description                                                    | Unit / Format              |
+|------------------------|-------------|----------------------------------------------------------------|----------------------------|
+| **Temporal**           | `pub_time`  | Timestamp when the message was published from vehicle to cloud | milliseconds (ms)          |
+|                        | `sub_time`  | Timestamp when the echoed message was received by the vehicle  | milliseconds (ms)          |
+|                        | `delay`     | Round-trip (V2N2V) delay = `sub_time - pub_time`               | milliseconds (ms)          |
+| **Vehicular state**    | `utmX`      | Vehicle east coordinate (UTM)                                  | meters (m)                 |
+|                        | `utmY`      | Vehicle north coordinate (UTM)                                 | meters (m)                 |
+|                        | `Heading`   | Vehicle yaw (NEU coordinate system)                            | radians (rad)              |
+|                        | `Velocity`  | Longitudinal vehicle speed                                     | m·s⁻¹ (meters per second)  |
+| **Network indicators** | `Cell_ID`   | Serving base-station identifier                                | string (ID)      |
+|                        | `RSRP`      | Reference Signal Received Power                                | dB                         |
+|                        | `SINR`      | Signal-to-Interference-plus-Noise Ratio                        | dB                         |
 
-Our code repository has been tested on Ubuntu 20.04 and Windows 11. The tool code provides data processing functions, including calculations for distance, communication delay, and more. It also includes code for generating statistical plots, such as violin plots, line charts, etc., to facilitate the work of researchers
+---
 
-## Video Links
+## Important subsets and data folders
 
-We have also conducted real-world testing to compare the impact of latency on planning and control (PnC) of cloud-based intelligent connected vehicles (CICV), as well as automated vehicles (AVs). The video links are as follows:
+The `data/` directory is organized by road scenario and contains the following important subfolders:
 
-- Urban Loop Scenario CICV and AV Real-World Test Comparison
+- **Urban road/** — Test runs in urban environments (dense infrastructure and mobile signal variations). Includes multiple speeds and both n8/n78 recordings.
+- **Arterial road/** — Test runs on arterial roads (higher vehicle speeds, intermediate coverage). Useful for studying Doppler and lane-change related delay effects.
+- **Rural and off road/** — Test runs in rural or off-road environments with sparse base-station coverage. This folder contains instances with weak signal conditions and extended link disruptions.
+- **W2S/** — runs where the vehicle traversed areas with varying signal quality (strong → weak or weak → strong). Contains continuous traces capturing delay evolution along signal gradients.
 
-1.  the results of AV in the urban loop scenario. [urbanloop_AV](https://youtu.be/ASDVWeAMCp4)
+---
 
-2.  the results of CICV in the urban loop scenario.[urbanloop_CICV](https://youtu.be/wY-nLKXZwNk)
+## Tools and how to run them
+All analysis scripts are in the `tools/` directory. Basic usage:
 
-- Shuttle Loop Scenario CICV and AV Real-World Test Comparison
+1. Create a Python 3.8+ environment and install dependencies:
+   pip install numpy pandas scipy matplotlib
 
-1.  the results of AV in the shuttle loop scenario. [shuttle_AV](https://youtu.be/8yW_RCdmDTc)
+2. commands:
+    
+merge all txt in data/ into a tab-separated all.txt and an Excel all.xlsx
 
-2.  the results of CICV in the shuttle loop scenario.[shuttle_CICV](https://youtu.be/-7OEzwrUfpw)
+    python tools/merge_txt_to_xlsx.py --input-folder data/ --pattern "*.txt" --output-txt outputs/all.txt --output-xlsx outputs/all.xlsx
 
-If you have any questions, feel free to contact <zhangxr@tongji.edu.cn>
+analyze all files under data/, write an Excel summary
+
+    python tools/rsrp_delay_analysis.py --input-folder data/ --pattern "*.txt" --output outputs/rsrp_delay.xlsx
+
+auto-extract velocity column named "Velocity" and delay column "delay(ms)"
+    
+    python tools/plot_delay_by_velocity.py --input-folder data/ --pattern "*.txt" --vel-col-name Velocity --delay-name "delay(ms)" --out figures/delay_by_velocity.png --dpi 600
+   
+Each script includes a short help message describing required and optional arguments.
+
+---
+
+## Usage notes and best practices
+- Use `delay` directly for most delay analyses. Because both timestamps come from the same onboard clock, `delay = sub_time - pub_time` yields the end-to-end RTT without external synchronization.
+- When grouping by signal quality `RSRP` to reproduce the analyses in the manuscript.
+- For modeling or control experiments, we recommend using the **20 Hz** runs as the standard operating condition; 100 Hz runs are provided for stress testing and high-frequency validation.
+- The rurla/offroad_Subset intentionally includes long-delay and disconnect events; treat these as genuine degradation cases for robustness testing rather than measurement artifacts.
+
+---
+
+## Licensing and citation
+- **License:** Creative Commons Attribution 4.0 International (CC BY 4.0). You are free to reuse and adapt the data provided you cite the dataset and original paper.
+- **How to cite the dataset (example):**
+  Zhang, X., Xiong, L., Zhang, P., Feng, H., Huang, J., Wang, X. & Tian, M. 5G communication delay dataset for cloud‑based vehicle planning and control. Zenodo https://doi.org/10.5281/zenodo.xxxxxx (2025).
+
+---
+
+
+## Contact and acknowledgements
+- For questions regarding the dataset, script usage, or data interpretation, contact: **zhangxr@tongji.edu.cn**.
+---
