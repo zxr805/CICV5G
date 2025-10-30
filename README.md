@@ -5,8 +5,8 @@
 We establish a 5G communication delay testbed at the intelligent connected vehicle evaluation base at Tongji University and conduct extensive field tests. Through these tests, over 150,000 records are collected to build our dataset, **CICV5G**. The dataset includes not only communication delay and channel conditions (such as reference signal received power and signal-to-noise ratio) but also vehicle poses (i.e., vehicle coordinates, velocity). Based on CICV5G, we conduct a comparative analysis of CICVs and autonomous vehicles (AVs) performance in typical scenarios and explore the impact of communication delay on the PnC. To the best of our knowledge, this is the first publicly available dataset of 5G communication delay specifically for PnC of CICVs. 
 ![image](Figures/readme.png)
 
-**DOI (placeholder)**
-Zenodo DOI: https://doi.org/10.5281/zenodo.17475688
+
+**Zenodo DOI**: https://doi.org/10.5281/zenodo.17475688
 
 ---
 
@@ -102,8 +102,8 @@ Each script includes a short help message describing required and optional argum
 
 ## Licensing and citation
 - **License:** Creative Commons Attribution 4.0 International (CC BY 4.0). You are free to reuse and adapt the data provided you cite the dataset and original paper.
-- **How to cite the dataset (example):**
-  Zhang, X., Xiong, L., Zhang, P., Feng, H., Huang, J., Wang, X. & Tian, M. 5G communication delay dataset for cloud‑based vehicle planning and control. Zenodo https://doi.org/10.5281/zenodo.xxxxxx (2025).
+- **citation:**
+  Zhang, X., Xiong, L., Zhang, P., Feng, H., Huang, J., Wang, X. & Tian, M. 5G communication delay dataset for cloud‑based vehicle planning and control. Zenodo https://doi.org/10.5281/zenodo.17475688 (2025).
 
 ---
 
